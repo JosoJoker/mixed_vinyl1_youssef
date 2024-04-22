@@ -11,14 +11,14 @@ class VinylMix
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column()]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $text = null;
+    private ?string $description = null;
 
     #[ORM\Column]
     private ?int $trackCount = null;
@@ -27,7 +27,15 @@ class VinylMix
     private ?string $genre = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
+    private \DateTimeImmutable $createdAt;
+
+    #[ORM\Column]
+    private int $votes = 0;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
@@ -39,21 +47,21 @@ class VinylMix
         return $this->title;
     }
 
-    public function setTitle(string $title): static
+    public function setTitle(string $title): self
     {
         $this->title = $title;
 
         return $this;
     }
 
-    public function getText(): ?string
+    public function getDescription(): ?string
     {
-        return $this->text;
+        return $this->description;
     }
 
-    public function setText(?string $text): static
+    public function setDescription(?string $description): self
     {
-        $this->text = $text;
+        $this->description = $description;
 
         return $this;
     }
@@ -63,7 +71,7 @@ class VinylMix
         return $this->trackCount;
     }
 
-    public function setTrackCount(int $trackCount): static
+    public function setTrackCount(int $trackCount): self
     {
         $this->trackCount = $trackCount;
 
@@ -75,7 +83,7 @@ class VinylMix
         return $this->genre;
     }
 
-    public function setGenre(string $genre): static
+    public function setGenre(string $genre): self
     {
         $this->genre = $genre;
 
@@ -87,9 +95,21 @@ class VinylMix
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getVotes(): ?int
+    {
+        return $this->votes;
+    }
+
+    public function setVotes(int $votes): self
+    {
+        $this->votes = $votes;
 
         return $this;
     }
