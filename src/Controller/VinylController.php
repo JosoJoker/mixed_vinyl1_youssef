@@ -1,5 +1,4 @@
-<?php
-
+// src/Controller/VinylController.php
 namespace App\Controller;
 
 use App\Repository\VinylMixRepository;
@@ -10,9 +9,7 @@ use function Symfony\Component\String\u;
 
 class VinylController extends AbstractController
 {
-    public function __construct(
-        private bool $isDebug
-    )
+    public function __construct(private bool $isDebug)
     {}
 
     #[Route('/', name: 'app_homepage')]
